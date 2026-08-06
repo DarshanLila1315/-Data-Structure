@@ -1,27 +1,34 @@
-// WAP to swap the first and last digit of a number.
+// WAP to swap the first and last digit of a number
+
+
 #include <stdio.h>
 
 int main()
 {
-    int num, first, last, digits, middle, swapped, divisor;
+    int num, temp, first, last, power = 1, middle, swap;
 
     printf("Enter a number: ");
     scanf("%d", &num);
 
+    temp = num;
     last = num % 10;
 
-    divisor = 1;
-    while (num / divisor >= 10)
+    // Find first digit and power
+    while (temp >= 10)
     {
-        divisor *= 10;
+        temp = temp / 10;
+        power = power * 10;
     }
 
-    first = num / divisor;
-    middle = (num % divisor) / 10;
+    first = temp;
 
-    swapped = last * divisor + middle * 10 + first;
+    // Find middle digits
+    middle = (num % power) / 10;
 
-    printf("Number after swapping = %d", swapped);
+    // Swap first and last digit
+    swap = last * power + middle * 10 + first;
+
+    printf("Number after swapping = %d", swap);
 
     return 0;
 }
