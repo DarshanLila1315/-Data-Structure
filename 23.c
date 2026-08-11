@@ -2,14 +2,47 @@
 
 #include <stdio.h>
 #include <string.h>
+#define n 100
+
+char stack[n];
+int top = -1;
+
+void push(int value)
+{
+    if (top == n - 1)
+    {
+        printf("Stack Overflow\n");
+    }
+    else
+    {
+        top++;
+        stack[top] = value;
+    }
+}
+
+int pop()
+{
+    if (top == -1)
+    {
+        printf("Stack Underflow\n");
+        return -1;
+    }
+    else
+    {
+        int value = stack[top];
+        top--;
+        return value;
+    }
+}
+
 
 int main()
 {
     char str[100];
-    char stack[100];
+   
 
-    int top = -1;
-    int i, n;
+    
+    int i, n1;
     int middle;
     int flag = 1;
 
@@ -18,24 +51,23 @@ int main()
     scanf("%s", str);
 
     // Find length of string
-    n = strlen(str);
+    n1 = strlen(str);
 
     // Push first half characters into stack
-    for(i = 0; i < n / 2; i++)
+    for(i = 0; i < n1 / 2; i++)
     {
-        top++;
-        stack[top] = str[i];
+        push(str[i]);
     }
 
     // Start checking from middle
-    middle = (n + 1) / 2;
+    middle = (n1 % 2 == 0) ? n1 / 2 : (n1 / 2) + 1;
 
     // Compare second half with stack
-    for(i = middle; i < n; i++)
+    for(i = middle; i < n1; i++)
     {
         if(stack[top] == str[i])
         {
-            top--;
+            pop();
         }
         else
         {
