@@ -46,20 +46,16 @@ int main()
     int middle;
     int flag = 1;
 
-    // Enter string
     printf("Enter a string: ");
     scanf("%s", str);
 
-    // Find length of string
     n1 = strlen(str);
 
-    // Push first half characters into stack
     for(i = 0; i < n1 / 2; i++)
     {
         push(str[i]);
     }
 
-    // Start checking from middle
     middle = (n1 % 2 == 0) ? n1 / 2 : (n1 / 2) + 1;
 
     // Compare second half with stack
