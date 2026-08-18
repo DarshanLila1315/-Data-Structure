@@ -4,11 +4,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#define max 10
+#define max 20
 int top = -1;
-char stack[max];
+int stack[max];
 
-void push(char c)
+void push(int c)
 {
     if (top == max - 1)
     {
@@ -20,7 +20,7 @@ void push(char c)
     }
 }
 
-char pop()
+int pop()
 {
     if (top == -1)
     {
@@ -38,32 +38,32 @@ void evaluation(char c)
     int a, b, result;
     if (isdigit(c))
     {
-        push(c);
+        push(c - '0');
     }
     else
     {
-        a = pop() - '0';
-        b = pop() - '0';
+        b = pop();
+        a = pop();
         switch (c)
         {
         case '+':
-            result = b + a;
+            result = a + b;
             break;
         case '-':
-            result = b - a;
+            result = a - b;
             break;
         case '*':
-            result = b * a;
+            result = a * b;
             break;
         case '/':
-            result = b / a;
+            result = a / b;
             break;
         }
-        push(result + '0');
+        push(result);
     }
 }
 
-void main()
+int main()
 {
     char postfix[max];
     int i = 0, result;
@@ -74,6 +74,7 @@ void main()
         evaluation(postfix[i]);
         i++;
     }
-    result = pop() - '0';
+    result = pop();
     printf("Result of the postfix expression is: %d\n", result);   
+    return 0;
 }
