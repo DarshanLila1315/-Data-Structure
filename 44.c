@@ -1,4 +1,4 @@
-// 44. WAP to implement Priority Queue. (Ascending / Descending)
+// 44. WAP to implement Priority Queue. (Descending)
 
 #include <stdio.h>
 #define n 5
