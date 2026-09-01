@@ -67,17 +67,45 @@ void display()
 //---------------------------------------------------------------------------------------
 void main()
 {
-    printf("\nEnque elemnt is : \n");
-    enqueu(11),
-    enqueu(22),
-    enqueu(33),
-    enqueu(44),
-    enqueu(55),
+    int choice, value;
     
-        display();
-    printf("\nAfter Deque elemnt is :%d \n", dequeu());
-   enqueu(66),
-  
-        // display();
-    display();
+    while (1)
+    {
+        printf("\n========== CIRCULAR QUEUE MENU ==========\n");
+        printf("1. Insert (Enqueue)\n");
+        printf("2. Delete (Dequeue)\n");
+        printf("3. Display\n");
+        printf("4. Exit\n");
+        printf("=========================================\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        
+        switch (choice)
+        {
+            case 1:
+                printf("Enter element to insert: ");
+                scanf("%d", &value);
+                enqueu(value);
+                break;
+            
+            case 2:
+                value = dequeu();
+                if (value != -1)
+                    printf("Dequeued element: %d\n", value);
+                break;
+            
+            case 3:
+                printf("Queue elements: ");
+                display();
+                printf("\n");
+                break;
+            
+            case 4:
+                printf("Exiting...\n");
+                return;
+            
+            default:
+                printf("Invalid choice! Please try again.\n");
+        }
+    }
 }
