@@ -7,92 +7,119 @@ using an Array
 */
 
 #include <stdio.h>
-#define n 5
-int Front = -1;
-int Rare = -1;
-int Queue[n];
-//---------------------------------------------------------------------------------------
-void enqueu(int y)
+#define SIZE 5
+
+int front = -1;
+int rear = -1;
+int queue[SIZE];
+
+//------------------------------------------------------
+
+void enqueue(int value)
 {
-    if (Rare > n - 1)
+    if (rear == SIZE - 1)
     {
-        printf("overflow");
+        printf("Queue is full (Overflow)\n");
         return;
     }
-    Rare++;
-    Queue[Rare] = y;
-    if (Front == -1)
-    {
-        Front = 0;
-    }
+
+    if (front == -1)
+        front = 0;
+
+    rear++;
+    queue[rear] = value;
+    printf("Inserted %d\n", value);
 }
-//---------------------------------------------------------------------------------------
-int dequeu()
+
+//------------------------------------------------------
+
+int dequeue()
 {
-    if (Front == -1)
+    int item;
+
+    if (front == -1 || front > rear)
     {
-        printf("underflow");
+        printf("Queue is empty (Underflow)\n");
         return -1;
     }
-    int y = Queue[Front];
 
-    Rare++;
-    Queue[Rare] = y;
-    if (Front == Rare)
+    item = queue[front];
+
+    if (front == rear)
     {
-        Front = Rare = -1;
+        front = rear = -1;
     }
-
     else
     {
-        Front++;
-        return y;
+        front++;
     }
+
+    printf("Deleted %d\n", item);
+    return item;
 }
-//---------------------------------------------------------------------------------------
+
+//------------------------------------------------------
+
+
 void display()
 {
-    if (Front == -1)
+    int i;
+
+    if (front == -1 || front > rear)
     {
-        printf("underflow");
+        printf("Queue is empty\n");
         return;
     }
-    for (int i = Front; i < Rare; i++)
+
+    printf("Queue elements are: ");
+    for (i = front; i <= rear; i++)
     {
-        printf("%d\t\n", Queue[i]);
+        printf("%d ", queue[i]);
     }
+    printf("\n");
 }
-//---------------------------------------------------------------------------------------
-void main()
+
+//------------------------------------------------------
+
+
+int main()
 {
-    printf("\nEnque elemnt is : \n");
-    enqueu(11),
-        enqueu(22),
-        enqueu(33),
-        enqueu(44),
-        enqueu(55),
-        enqueu(66),
-        display(),
-        printf("\nDeleted element is : %d\n", dequeu());
-    printf("\nAfter Deletion  : \n");
-    display();
+    int choice, value;
+
+    do
+    {
+        printf("\nMENU\n");
+        printf("1. ENQUEUE\n");
+        printf("2. DEQUEUE\n");
+        printf("3. DISPLAY\n");
+        printf("4. EXIT\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+            case 1:
+                printf("Enter value to insert: ");
+                scanf("%d", &value);
+                enqueue(value);
+                break;
+
+            case 2:
+                dequeue();
+                break;
+
+            case 3:
+                display();
+                break;
+
+            case 4:
+                printf("Exiting program...\n");
+                break;
+
+            default:
+                printf("Invalid choice!\n");
+        }
+    } while (choice != 4);
+
+    return 0;
 }
-//---------------------------------------------------------------------------------------
-/*
-Enque element is : 
-11
-22
-33
-44
-55
-
-Deleted element is : 11
-
-After Deletion  : 
-22
-33
-44
-55
-66
-*/
-//---------------------------------------------------------------------------------------
