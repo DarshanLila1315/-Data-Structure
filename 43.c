@@ -11,15 +11,17 @@ int deque[SIZE];
 int front = -1;
 int rear = -1;
 void insert_front(int x){
-    if(rear == SIZE-1){
+    if(front == 0){
         printf("Overflow\n");
         return;
     }
-    rear++;
-    deque[rear] = x;
     if(front == -1){
-        front = 0;
+        front = rear = 0;
     }
+    else{
+        front--;
+    }
+    deque[front] = x;
 }
 
 int delete_front(){
@@ -39,19 +41,17 @@ int delete_front(){
     }
 }
 void insert_rear(int x){
-    if(front==0){
+    if(rear == SIZE-1){
         printf("Overflow\n");
         return;
     }
-    else{
-        if(front ==-1){
-            front = rear = 0;
-        }
-        else{
-            front--;
-        }
+    if(front == -1){
+        front = rear = 0;
     }
-    deque[front] = x;
+    else{
+        rear++;
+    }
+    deque[rear] = x;
 }
 
 int delete_rear(){
